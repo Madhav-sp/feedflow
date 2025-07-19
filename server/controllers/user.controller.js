@@ -47,6 +47,7 @@ export const signup = asyncHandler(async (req, res) => {
     await newUser.save();
     res.status(201).json(new ApiResponse(200, newUser, "Signup successful"));
   } catch (error) {
+    console.log(error)
     throw new ApiError(500, "Internal server error");
   }
 });
