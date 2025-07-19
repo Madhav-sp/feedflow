@@ -12,14 +12,22 @@ import AssignedFeedback from "./pages/AssignedFeedback";
 import ViewFeedback from "./pages/companyDashboard/ViewFeedback";
 import ManageEmployees from "./pages/companyDashboard/ManageEmployees";
 import Overview from "./pages/companyDashboard/Overview";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Feedback from "./pages/Feedback";
 
 
 const App = () => {
   return (
     <Router>
+      <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/profile" element={<Profile />} />
+
         <Route path="/user" element={<UserDashboard />} />
         <Route path="/employee" element={<EmployeeDashboard />} />
         <Route path="/company" element={<CompanyDashboard />}>
@@ -27,7 +35,9 @@ const App = () => {
           <Route path="manage-employees" element={<ManageEmployees />} />
           <Route path="view-feedback" element={<ViewFeedback />} />
         </Route>
+        <Route path="/ama" element={<ManageEmployees />} />
         <Route path="/assigned-feedback" element={<AssignedFeedback />} />
+        <Route path="/feedbacks" element={<Feedback />} />
       </Routes>
     </Router>
   );

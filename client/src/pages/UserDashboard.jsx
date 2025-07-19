@@ -34,23 +34,7 @@ const UserDashboard = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Select Company */}
-          <div>
-            <label className="block font-medium text-sm text-gray-700 mb-1">
-              Select Company
-            </label>
-            <select
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              required
-            >
-              <option value="">Choose a company</option>
-              <option value="Google">Google</option>
-              <option value="Microsoft">Microsoft</option>
-              <option value="Amazon">Amazon</option>
-            </select>
-          </div>
+         
 
           {/* Concern Type */}
           <div>
@@ -94,11 +78,7 @@ const UserDashboard = () => {
           </button>
         </form>
 
-        {/* History Section */}
-        <div className="mt-10">
-          <h3 className="text-lg font-semibold text-gray-800 mb-2">History</h3>
-          <div className="text-gray-500 italic">No history yet.</div>
-        </div>
+        
       </div>
     </div>
   );
