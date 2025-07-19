@@ -11,15 +11,17 @@ export const test = (req, res) => {
 };
 
 export const signup = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
 
   if (
     !username ||
     !email ||
     !password ||
+    !role ||
     username === "" ||
     email === "" ||
-    password === ""
+    password === "" ||
+    role === ""
   ) {
     throw new ApiError(400, "all fields are required");
   }
@@ -38,6 +40,7 @@ export const signup = asyncHandler(async (req, res) => {
     username,
     email,
     password,
+    role,
   });
 
   try {
