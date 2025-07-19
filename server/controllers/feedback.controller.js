@@ -158,3 +158,36 @@ export const getFeedbacksByBusiness = asyncHandler(async (req, res) => {
     .status(200)
     .json(new ApiResponse("Feedbacks retrieved successfully", feedbacks));
 });
+
+export const getFeedbacksByDepartment = asyncHandler(async (req, res) => {
+  const { employeeId } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(employeeId)) {
+    throw new ApiError(400, "Invalid employee ID");
+  }
+
+  const employee = await User.findById(employeeId).select("department");
+
+  if (!employee) {
+    throw new ApiError(404, "Employee not found");
+  }
+
+  const feedbacks = await Feedback.find({
+    $and: [
+      { department: employee.department },
+      { receivedBy: employee.company },
+    ],
+  })
+    .populate("givenBy", "-password")
+    .populate("receivedBy", "-password");
+
+  if (feedbacks.length === 0) {
+    return res
+      .status(404)
+      .json(new ApiResponse("No feedbacks found for this department"));
+  }
+
+  return res
+    .status(200)
+    .json(new ApiResponse("Feedbacks retrieved successfully", feedbacks));
+});

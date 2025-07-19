@@ -35,9 +35,10 @@ const userSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Feedback"
     }],
+    department: [String],
     company: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Company"
+        ref: "User"
     },
     employees: [{
         type: mongoose.Schema.Types.ObjectId,
