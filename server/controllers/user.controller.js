@@ -156,12 +156,14 @@ export const google = asyncHandler(async (req, res) => {
       Math.random().toString(36).slice(-8);
 
     const hashedPassword = await bcrypt.hash(generatedPassword, 10);
+    const { role } = req.body;
 
     const newUser = new User({
       username,
       email,
+      role,
       password: hashedPassword,
-      avatar:
+      profilePicture:
         avatar ||
         "https://as2.ftcdn.net/jpg/03/40/12/49/1000_F_340124934_bz3pQTLrdFpH92ekknuaTHy8JuXgG7fi.webp",
     });
