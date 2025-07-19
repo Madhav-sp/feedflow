@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
-export default function OAuth({ onClose }) {
+export default function OAuth({ onClose, role }) {
   const auth = getAuth(app);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -22,9 +22,10 @@ export default function OAuth({ onClose }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName: resultsFromGoogle.user.displayName,
+          username: resultsFromGoogle.user.displayName,
           email: resultsFromGoogle.user.email,
           avatar: resultsFromGoogle.user.photoURL,
+          role,
         }),
       });
 
