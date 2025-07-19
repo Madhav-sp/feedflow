@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { signup, login, signout, updateUser, deleteUser, google} from "../controllers/user.controller.js";
+import { signup, login, signout, updateUser, deleteUser, google, getDepartmentsById, getEmployees} from "../controllers/user.controller.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
@@ -11,6 +11,8 @@ router.post('/google', google);
 // secure routes
 router.post("/logout", signout);
 router.put("/update", verifyJWT, updateUser);
+router.get("/departments/:id",getDepartmentsById);
 router.delete("/delete", verifyJWT, deleteUser);
+router.get("/employees", verifyJWT, getEmployees);
 
 export default router;

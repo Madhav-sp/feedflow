@@ -191,3 +191,36 @@ export const google = asyncHandler(async (req, res) => {
       );
   }
 });
+
+export const getDepartmentsById = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const user = await User.findById(id).select("department");
+
+  if (!user) {
+    throw new ApiError(404, "business not found");
+  }
+
+  res
+    .status(200)
+    .json(
+      new ApiResponse(200, user.department, "Departments fetched successfully")
+    );
+});
+
+export const getEmployees = asyncHandler(async (req, res) => {
+  const { id } = req.user; 
+  if(!id){
+    console.log("id ledu ra");
+    throw new ApiError(400, "User ID is required");
+  }
+  const employees = await User.find({ company: id }).select("-password");
+
+  if (!employees || employees.length === 0) {
+    throw new ApiError(404, "No employees found for this company");
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, employees, "Employees fetched successfully"));
+});

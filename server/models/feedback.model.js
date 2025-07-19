@@ -19,6 +19,10 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    department: {
+        type:String,
+        required: true,
+    },
     status: {
         type: String,
         enum: ["pending", "approved", "rejected"],
