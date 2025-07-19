@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import path from "path";
-// import userRoutes from "./routes/user.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import feedbackRoutes from "./routes/feedback.routes.js";
 
@@ -34,6 +34,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// app.use("/api/user", userRoutes);
+app.use("/api/user", userRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/feedback", feedbackRoutes);

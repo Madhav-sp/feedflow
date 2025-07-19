@@ -49,12 +49,12 @@ export const signup = asyncHandler(async (req, res) => {
 });
 
 export const login = asyncHandler(async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password || email === "" || password === "") {
-    throw new ApiError(400, "all fields are required");
-  }
+  const { usernameOrEmail, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({
+    $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }],
+  });
+
   if (!user) {
     throw new ApiError(404, "user not found");
   }
